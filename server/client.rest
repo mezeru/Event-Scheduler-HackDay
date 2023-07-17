@@ -1,0 +1,8 @@
+#####
+POST  http://localhost:5000/newuser HTTP/1.1
+content-type: application/json
+
+{"Email":"jermpro0@gmail.com", "Password":"Yash0607", "Name":"Yash" }
+
+
+#####
