@@ -1,5 +1,7 @@
-import fastify from "fastify";
 import user from "./models/user";
+import sjcl from "sjcl";
+import jwt from "jsonwebtoken";
+import verifyToken from "./scripts/verifyToken";
 
 export default async(fastify, options) => {
     
@@ -22,7 +24,7 @@ export default async(fastify, options) => {
         }       
     });
 
-    fastify.get('/User', async(request,reply) => {
+    fastify.get('/User', {prefinder: verifyToken} ,async(request,reply) => {
 
         try{
 
@@ -46,7 +48,38 @@ export default async(fastify, options) => {
 
     });
 
-    
+    fastify.post('/login', async (request, reply) => {
+
+        try{
+            const login = await user.findOne({Email: request.body.Email});
+
+            if(!login){
+                reply.code(404).send({message: "User not Found"});
+            }
+
+            console.log(login.Password, request.body.Password)
+
+            if(login.Password === request.body.Password){
+
+                const id = login._id;
+                const token = jwt.sign({id}, process.env.JWTSCRT, {
+                    expiresIn: 300,
+                });
+
+
+                reply.code(200).send({message: "Authorised", token: token});
+            }
+            else{
+                reply.code(401).send({message: "Incorrect Login Credentials"});
+            }
+            
+        }
+        catch(e){
+            reply.code(500).send(e);
+        }
+
+
+    });
 
 
 
