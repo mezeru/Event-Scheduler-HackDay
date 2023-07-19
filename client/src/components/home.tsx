@@ -1,9 +1,44 @@
-import react from "react";
+import axios from "axios";
+import react, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+
+      const token = localStorage.getItem('token');
+
+      const verify = async () => {
+        try{
+            if(token){
+
+                const resp = await axios.post("http://localhost:5000/verify-token",{},{
+                headers: {
+                    "Authorization": token,
+                    "content-type": "application/json"
+                }
+
+                
+
+            });
+
+            if(await resp.data === 200){
+                navigate('/Events');
+            }
+
+            }
+
+        }
+        catch(e){
+            console.log(e);
+            
+        }
+        
+    }
+
+    },[]);
 
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
