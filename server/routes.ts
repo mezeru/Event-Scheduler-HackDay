@@ -48,13 +48,15 @@ export default async(fastify, options) => {
 
     });
 
-    fastify.get('/Events' ,async(request,reply) => {
+    fastify.get('/Events', {prefinder: verifyToken} ,async(request,reply) => {
 
         try{
 
             const resp = await user.findOne({_id: request.query.id});
 
             const events = resp.Events;
+
+            
             
             if(resp){
                 reply.code(200).send(events);
@@ -87,6 +89,8 @@ export default async(fastify, options) => {
                 }
             }
            })
+           
+
             
             
             reply.code(200).send();
@@ -100,6 +104,12 @@ export default async(fastify, options) => {
         }
 
     });
+
+    fastify.post('/verify-token', { preHandler: [verifyToken] } ,async (request, reply ) => {
+
+        reply.send(200).send({"Message": "Approved"})
+
+    })
 
     fastify.post('/login', async (request, reply) => {
 

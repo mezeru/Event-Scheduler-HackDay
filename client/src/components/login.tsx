@@ -24,7 +24,7 @@ export const Login = () => {
     if( resp.status == 200){
       localStorage.setItem('token', resp.data.token);
       localStorage.setItem('id', resp.data.id);
-      navigate('/');
+      navigate('/Events');
     }
     }
 

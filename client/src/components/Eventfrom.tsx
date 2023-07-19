@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const EventForm = () => {
   const [title, setTitle] = useState('');
@@ -9,13 +10,15 @@ export const EventForm = () => {
   const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
 
     
     try{
-      const resp = axios.post(`http://localhost:5000/Events?id=${id}`,{
+      const resp = await axios.post(`http://localhost:5000/Events?id=${id}`,{
         
         "Title": title,
         "Date": time,
@@ -27,7 +30,7 @@ export const EventForm = () => {
         }
       });
 
-      console.log(resp);
+      navigate('/Events');
 
 
       
@@ -42,7 +45,7 @@ export const EventForm = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
       <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
-        <form className="max-w-md mx-auto p-4 bg-white rounded-lg">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white rounded-lg">
         <h2 className="text-center text-3xl font-semibold text-gray-800 ">Add Event</h2>
         <div className="mt-4">
             <label htmlFor="title" className="mt-2 text-xl text-center text-gray-600 font-bold mb-2">
@@ -51,6 +54,7 @@ export const EventForm = () => {
             <input
             type="text"
             id="title"
+            required
             placeholder="Enter Title"
             className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:border-indigo-500 focus:bg-white focus:outline-none mt-2 mb-4"
             value={title}
@@ -64,6 +68,7 @@ export const EventForm = () => {
             <input
             type="datetime-local"
             id="time"
+            required
             className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:border-indigo-500 focus:bg-white focus:outline-none mt-2 mb-4"
             value={time}
             onChange={(e) => setTime(e.target.value)}
@@ -77,6 +82,7 @@ export const EventForm = () => {
             id="notes"
             className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:border-indigo-500 focus:bg-white focus:outline-none mt-2 mb-4" 
             value={notes}
+            required
             placeholder="Make Notes"
             onChange={(e) => setNotes(e.target.value)}
             ></textarea>
