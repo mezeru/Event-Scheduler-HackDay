@@ -10,7 +10,7 @@ content-type: application/json
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{"Email":"jermpro0@gmail.com", "Password":"Yash0607"}
+{"Email":"jermpro0@gmail.com", "Password":"8bac8d96d241bac52fabcad3e3155701c2146444568e93ac3ad760b5161cd01a"}
 
 
 #####
@@ -18,6 +18,26 @@ content-type: application/json
 
 GET   http://localhost:5000/User HTTP/1.1
 Authorization: 
+content-type: application/json
+
+
+#####
+
+POST  http://localhost:5000/Events?id=64b5a1315eb611685d53f046 HTTP/1.1
+content-type: application/json
+
+{
+    
+        "Title": "Meet",
+        "Date": "1999-06-02T00:00:00.000Z",
+        "Notes": "None"
+    
+}
+
+#####
+
+
+GET  http://localhost:5000/Events?id=64b5a1315eb611685d53f046 HTTP/1.1
 content-type: application/json
 
 

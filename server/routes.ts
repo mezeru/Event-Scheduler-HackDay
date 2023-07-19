@@ -48,6 +48,59 @@ export default async(fastify, options) => {
 
     });
 
+    fastify.get('/Events' ,async(request,reply) => {
+
+        try{
+
+            const resp = await user.findOne({_id: request.query.id});
+
+            const events = resp.Events;
+            
+            if(resp){
+                reply.code(200).send(events);
+            }
+
+            reply.code(404).send("Not Found");
+
+        }
+
+
+        
+        catch(e){
+            reply.code(500).send(e);
+        }
+
+    });
+
+    fastify.post('/Events', {prefinder: verifyToken} ,async (request,reply) => {
+
+        try{
+
+            
+
+           const resp = await user.findOneAndUpdate({_id: request.query.id},{
+            $push: {
+                Events: {
+                    Title: request.body.Title,
+                    Date: request.body.Date,
+                    Notes: request.body.Notes
+                }
+            }
+           })
+            
+            
+            reply.code(200).send();
+
+        }
+
+
+        
+        catch(e){
+            reply.code(500).send(e);
+        }
+
+    });
+
     fastify.post('/login', async (request, reply) => {
 
         try{
@@ -57,7 +110,6 @@ export default async(fastify, options) => {
                 reply.code(404).send({message: "User not Found"});
             }
 
-            console.log(login.Password, request.body.Password)
 
             if(login.Password === request.body.Password){
 
@@ -67,7 +119,7 @@ export default async(fastify, options) => {
                 });
 
 
-                reply.code(200).send({message: "Authorised", token: token});
+                reply.code(200).send({message: "Authorised", token: token, id: login._id});
             }
             else{
                 reply.code(401).send({message: "Incorrect Login Credentials"});
