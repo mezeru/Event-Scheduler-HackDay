@@ -6,6 +6,8 @@ export const EventForm = () => {
   const [title, setTitle] = useState('');
   const [time, setTime] = useState('');
   const [notes, setNotes] = useState('');
+  
+  const [local, setLocal] = useState('');
 
   const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
@@ -22,7 +24,8 @@ export const EventForm = () => {
         
         "Title": title,
         "Date": time,
-        "Notes": notes
+        "Notes": notes,
+        "Location": local
             
       },{
         headers:{
@@ -86,6 +89,19 @@ export const EventForm = () => {
             placeholder="Make Notes"
             onChange={(e) => setNotes(e.target.value)}
             ></textarea>
+        </div>
+        <div className="mb-4">
+            <label htmlFor="notes" className="mt-2 text-xl text-center text-gray-600 font-bold mb-2">
+            Location
+            </label>
+            <input
+            id="notes"
+            className="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-200 border border-gray-300 rounded-md focus:border-indigo-500 focus:bg-white focus:outline-none mt-2 mb-4" 
+            value={local}
+            required
+            placeholder="Location of Event"
+            onChange={(e) => setLocal(e.target.value)}
+            ></input>
         </div>
         <div className="flex justify-end">
             <button

@@ -10,7 +10,8 @@ export default async(fastify, options) => {
             Name: request.body.Name,
             Email : request.body.Email,
             Password: request.body.Password,
-            Events: []
+            Events: [],
+            Shared: []
         });
 
         try{
@@ -85,7 +86,8 @@ export default async(fastify, options) => {
                 Events: {
                     Title: request.body.Title,
                     Date: request.body.Date,
-                    Notes: request.body.Notes
+                    Notes: request.body.Notes,
+                    Location: request.body.Location
                 }
             }
            })

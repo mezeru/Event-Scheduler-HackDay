@@ -7,23 +7,33 @@ const EventCard = ({ event }) => {
   
 
   return (
-    <div className="bg-white shadow-xl rounded-lg p-6 mb-4 ax-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-500 transform hover:scale-105">
-    <div className="flex flex-row justify-between">
-    <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-4xl font-bold bg-clip-text text-transparent">
-      {event.Title}
-    </div>
-    <div>
 
     
-      <p className="mt-2 text-center font-bold text-gray-600 mb-2">
-        {format(new Date(event.Date), 'MM/dd/yyyy')}        
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden m-3">
+    <div className="p-4">
+      <h3 className="text-3xl font-semibold mb-2">{event.Title}</h3>
+      <p className="text-gray-600 text-sm mb-4">
+        {event.Notes}
       </p>
-      <p className="mt-2 text-center font-bold text-gray-600 mb-2">
-      {format(new Date(event.Date), 'HH:mm')}       
-      </p>
+      <div className="flex items-center justify-between">
+        
+        <div>
+          <p className="text-gray-500 text-sm">Date</p>
+          <p className="text-gray-800 font-semibold">{format(new Date(event.Date), 'MM/dd/yyyy')} </p>
+        </div>
+        
+        <div>
+          <p className="text-gray-500 text-sm">Time</p>
+          <p className="text-gray-800 font-semibold">{format(new Date(event.Date), 'HH:mm')}</p>
+        </div>
+        <div>
+          <p className="text-gray-500 text-sm">Location</p>
+          <p className="text-gray-800 font-semibold">{event.Location}</p>
+        </div>
+
+      </div>
+      
     </div>
-    </div>
-    <p className="mt-2 text-center text-gray-600 text-xl">{event.Notes}</p>
   </div>
   );
 };
@@ -64,7 +74,7 @@ export const EventContainer = () => {
 
   const EventList = ({ events }) => {
     return (
-      <div>
+      <div className="grid grid-cols-2 gap-4">
         {events.map((event) => {
   
         const eventDate = new Date(event.Date); 

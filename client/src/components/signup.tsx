@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import sjcl from 'sjcl';
 
 export const Signup = () => {
@@ -9,6 +10,8 @@ export const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigation = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ export const Signup = () => {
 
 
     try{
-      await axios.post("http://localhost:5000/newuser",
+      const resp = await axios.post("http://localhost:5000/newuser",
       {
         "Name": name,
         "Email": email,
@@ -28,12 +31,14 @@ export const Signup = () => {
          }
       )
       
+      navigation('/Login')
 
     }
     catch(e){
       console.log(e);
     }
       
+
       
 
 

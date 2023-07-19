@@ -12,6 +12,10 @@ const Event = new mongoose.Schema({
     Notes:{
         type: String,
         required: false
+    },
+    Location:{
+        type: String,
+        required: false
     }
 })
 
@@ -31,6 +35,10 @@ const User = new mongoose.Schema({
     },
     Events:{
         type: [Event],
+        required: false
+    },
+    Shared:{
+        type: [String],
         required: false
     }
 
