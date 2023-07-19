@@ -7,7 +7,7 @@ const EventCard = ({ event }) => {
   
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
+    <div className="bg-white shadow-xl rounded-lg p-6 mb-4 ax-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition duration-500 transform hover:scale-105">
     <div className="flex flex-row justify-between">
     <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-4xl font-bold bg-clip-text text-transparent">
       {event.Title}
