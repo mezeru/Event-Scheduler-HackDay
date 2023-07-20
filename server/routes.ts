@@ -75,7 +75,32 @@ export default async(fastify, options) => {
 
     });
 
-    fastify.post('/Events', {prefinder: verifyToken} ,async (request,reply) => {
+    fastify.delete('/Events', {prefinder: verifyToken}, async (request,reply) => {
+
+        try{
+
+            const resp = await user.updateOne({_id: request.query.id},{
+                $pull: {
+                    Events:{
+                        _id: request.query.Event
+                    }
+                }
+            });
+
+            if(resp){
+                reply.code(200);
+            }
+
+
+        }
+
+        catch(e){
+            reply.code(500).send(e);
+        }
+
+    });
+
+    fastify.post('/Events', {prefinder: verifyToken} , async (request,reply) => {
 
         try{
 
