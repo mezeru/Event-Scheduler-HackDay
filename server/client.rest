@@ -46,14 +46,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVhMTMxNWViNjEx
 
 
 
-GET  http://localhost:5000/AllEvents?id=64ba20f1d07eaa505f036cb7 HTTP/1.1
+POST http://localhost:5000/AllEvents?id=64ba20f1d07eaa505f036cb7 HTTP/1.1
 content-type: application/json
 
 {
     
-        "Title": "Free Food @ Home",
-        "Date": "2023-07-30T00:00:00.000Z",
-        "Notes": "None"
+        "Title": "Networking Event ",
+        "Date": "2023-08-31T00:00:00.000Z",
+        "Notes": "Just Talk to People",
+        "Location": "Room 2312" 
+8
     
 }
 
