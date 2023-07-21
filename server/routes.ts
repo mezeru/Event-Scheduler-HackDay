@@ -196,7 +196,7 @@ export default async(fastify, options) => {
 
                 const id = login._id;
                 const token = jwt.sign({id}, process.env.JWTSCRT, {
-                    expiresIn: 300,
+                    expiresIn: 1000,
                 });
 
 
