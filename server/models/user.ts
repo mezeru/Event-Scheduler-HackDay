@@ -40,6 +40,10 @@ const User = new mongoose.Schema({
     Shared:{
         type: [String],
         required: false
+    },
+    Admin:{
+        type: Boolean,
+        required: true
     }
 
 })

@@ -29,7 +29,7 @@ const EventCard = ({ event }) => {
   return (
 
     
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden m-3">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden m-5">
     <div className="p-4">
       <div className="flex flex-row justify-between">
       <div>

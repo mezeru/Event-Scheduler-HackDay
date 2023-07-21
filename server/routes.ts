@@ -2,6 +2,7 @@ import user from "./models/user";
 import sjcl from "sjcl";
 import jwt from "jsonwebtoken";
 import verifyToken from "./scripts/verifyToken";
+import { error } from "console";
 
 export default async(fastify, options) => {
     
@@ -11,7 +12,8 @@ export default async(fastify, options) => {
             Email : request.body.Email,
             Password: request.body.Password,
             Events: [],
-            Shared: []
+            Shared: [],
+            Admin: false
         });
 
         try{
@@ -24,6 +26,8 @@ export default async(fastify, options) => {
 
         }       
     });
+
+    
 
     fastify.get('/User', {prefinder: verifyToken} ,async(request,reply) => {
 
@@ -94,6 +98,46 @@ export default async(fastify, options) => {
 
         }
 
+        catch(e){
+            reply.code(500).send(e);
+        }
+
+    });
+
+    fastify.post('/AllEvents' , async (request,reply) => {
+
+        try{
+
+            console.log(request.query.id)
+            
+            const isAdmin = await user.findOne({_id: request.query.id});
+            
+            if(!isAdmin.Admin){
+                throw error('UnAuthorised');
+            }
+
+            console.log("Here");
+
+           const resp = await user.updateMany({},{
+            $push: {
+                Events: {
+                    Title: request.body.Title,
+                    Date: request.body.Date,
+                    Notes: request.body.Notes,
+                    Location: request.body.Location
+                }
+            }
+           })
+           
+
+            
+            
+            reply.code(200).send();
+
+        }
+
+
+        
         catch(e){
             reply.code(500).send(e);
         }

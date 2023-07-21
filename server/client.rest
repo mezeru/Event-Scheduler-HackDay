@@ -10,7 +10,7 @@ content-type: application/json
 POST  http://localhost:5000/login HTTP/1.1
 content-type: application/json
 
-{"Email":"jermpro0@gmail.com", "Password":"8bac8d96d241bac52fabcad3e3155701c2146444568e93ac3ad760b5161cd01a"}
+{"Email":"yash.chaudhari@ucf.edu", "Password":"8bac8d96d241bac52fabcad3e3155701c2146444568e93ac3ad760b5161cd01a"}
 
 
 #####
@@ -41,5 +41,20 @@ GET  http://localhost:5000/Events?id=64b5a1315eb611685d53f046 HTTP/1.1
 content-type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjVhMTMxNWViNjExNjg1ZDUzZjA0NiIsImlhdCI6MTY4OTc0MDY2OSwiZXhwIjoxNjg5NzQwOTY5fQ.pP3VwCHmcQxdOFnFt-1v0sAZO2-RcX0xLVQl25HAGZI
 
+
+#####
+
+
+
+GET  http://localhost:5000/AllEvents?id=64ba20f1d07eaa505f036cb7 HTTP/1.1
+content-type: application/json
+
+{
+    
+        "Title": "Free Food @ Home",
+        "Date": "2023-07-30T00:00:00.000Z",
+        "Notes": "None"
+    
+}
 
 #####
